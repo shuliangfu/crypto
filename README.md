@@ -3,7 +3,7 @@
 > 一个兼容 Deno 和 Bun 的加密和安全工具库，提供哈希、加密解密、签名验证、JWT 等功能
 
 [![JSR](https://jsr.io/badges/@dreamer/crypto)](https://jsr.io/@dreamer/crypto)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)
 
 ---
 
