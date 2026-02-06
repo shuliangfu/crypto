@@ -1,45 +1,22 @@
 # @dreamer/crypto
 
-> 一个兼容 Deno 和 Bun 的加密和安全工具库，提供哈希、加密解密、签名验证、JWT 等功能
+> Encryption and security utilities for Deno and Bun: hash, encrypt/decrypt, sign/verify, JWT, and more.
+
+English | [中文 (Chinese)](./README-zh.md)
 
 [![JSR](https://jsr.io/badges/@dreamer/crypto)](https://jsr.io/@dreamer/crypto)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)
+[![Tests](https://img.shields.io/badge/tests-70%20passed-brightgreen)](./TEST_REPORT.md)
 
 ---
 
-## 🎯 功能
+## 🎯 Features
 
-一个功能完整的加密和安全工具库，提供哈希算法、对称/非对称加密解密、数字签名、JWT 令牌、密码哈希、随机数生成等全面的安全功能。基于 Web Crypto API 标准实现，**全面兼容 Deno 和 Bun 运行时环境**，适用于数据加密存储、身份验证、安全通信、密码管理等各类安全场景。
-
----
-
-## ✨ 特性
-
-| 特性 | 说明 |
-|------|------|
-| 🔐 **哈希算法** | MD5、SHA1、SHA256、SHA512 |
-| 🔒 **对称加密解密（AES）** | AES-128-GCM、AES-256-GCM、AES-128-CBC、AES-256-CBC |
-| 🔑 **非对称加密解密（RSA）** | RSA-OAEP |
-| ✍️ **数字签名** | RSA、ECDSA 签名生成和验证 |
-| 🎲 **随机数生成** | 安全随机数生成器 |
-| 🔐 **密码哈希** | bcrypt、argon2（argon2id、argon2i、argon2d） |
-| 🎫 **JWT（JSON Web Token）** | Token 生成、验证、解析 |
-| 🔑 **密钥生成和管理** | AES 密钥、RSA 密钥对、ECDSA 密钥对 |
+Full-featured crypto and security library: hash, symmetric/asymmetric encryption, digital signatures, JWT, password hashing, random generation. Built on Web Crypto API. Compatible with Deno and Bun.
 
 ---
 
-## 🎯 使用场景
-
-- **数据加密存储和传输**：敏感数据加密、数据库字段加密、API 数据传输加密
-- **身份验证和授权**：JWT Token 生成和验证、会话管理
-- **安全通信**：HTTPS 证书、消息加密、密钥交换
-- **密码存储**：用户密码哈希存储、密码验证
-- **数字签名**：文档签名、数据完整性验证、防篡改
-- **安全令牌**：API 密钥生成、临时令牌、一次性密码
-
----
-
-## 📦 安装
+## 📦 Installation
 
 ### Deno
 
@@ -55,198 +32,198 @@ bunx jsr add @dreamer/crypto
 
 ---
 
-## 🌍 环境兼容性
+## 🌍 Environment Compatibility
 
-| 环境 | 版本要求 | 状态 |
-|------|---------|------|
-| **Deno** | 2.5+ | ✅ 完全支持 |
-| **Bun** | 1.0+ | ✅ 完全支持 |
-| **服务端** | - | ✅ 支持（兼容 Deno 和 Bun 运行时，使用 Web Crypto API） |
-| **客户端** | - | ✅ 支持（浏览器环境，使用 Web Crypto API） |
-| **依赖** | - | 📦 无外部依赖（基于 Web Crypto API 标准） |
+| Environment | Version Requirement | Status |
+| ----------- | ------------------- | ------ |
+| **Deno** | 2.5+ | ✅ Fully supported |
+| **Bun** | 1.0+ | ✅ Fully supported |
+| **Server** | - | ✅ Supported (Deno/Bun runtime, Web Crypto API) |
+| **Client** | - | ✅ Supported (browser, Web Crypto API) |
+| **Dependencies** | - | 📦 No external dependencies (Web Crypto API) |
 
 ---
 
-## 🚀 快速开始
+## ✨ Characteristics
 
-### 哈希算法
+- **Hash**:
+  - SHA1, SHA256, SHA512
+  - Hash verification
+  - MD5 rejected (insecure)
+- **Symmetric encryption (AES)**:
+  - AES-128-GCM, AES-256-GCM, AES-128-CBC, AES-256-CBC
+  - Key generation and import
+  - CryptoKey and Uint8Array key support
+- **Asymmetric encryption (RSA)**:
+  - RSA-OAEP
+  - Key pair generation (configurable modulus length)
+- **Digital signatures**:
+  - RSA signatures (RSA-SHA256, RSA-SHA384, RSA-SHA512)
+  - ECDSA signatures (P-256, P-384, P-521)
+- **Random generation**:
+  - Secure random bytes
+  - Random string (custom charset support)
+  - Random integer
+  - UUID v4
+- **Password hashing**:
+  - bcrypt, argon2 (argon2id, argon2i, argon2d)
+- **JWT (JSON Web Token)**:
+  - Token generation, verification, decode
+  - HS256/384/512, RS256/384/512, ES256/384/512
+- **Key generation and management**:
+  - AES keys, RSA key pairs, ECDSA key pairs
+
+---
+
+## 🎯 Use Cases
+
+- **Data encryption storage and transport**: Sensitive data encryption, database field encryption, API data transmission encryption
+- **Authentication and authorization**: JWT token generation and verification, session management
+- **Secure communication**: HTTPS certificates, message encryption, key exchange
+- **Password storage**: User password hashing, password verification
+- **Digital signatures**: Document signing, data integrity verification, tamper resistance
+- **Security tokens**: API key generation, temporary tokens, one-time passwords
+
+---
+
+## 🚀 Quick Start
+
+### Hash Algorithm
 
 ```typescript
 import { hash, verifyHash } from "jsr:@dreamer/crypto";
 
-// 计算哈希值
-const data = "敏感数据";
-const hashValue = hash(data, "sha256");
-console.log(hashValue); // 64位十六进制字符串
+const data = "sensitive data";
+const hashValue = await hash(data, "sha256");
+console.log(hashValue); // 64-char hex string
 
-// 验证哈希值
-const isValid = verifyHash(data, hashValue, "sha256");
+const isValid = await verifyHash(data, hashValue, "sha256");
 console.log(isValid); // true
 
-// 支持的算法
-const sha1Hash = hash(data, "sha1");
-const sha256Hash = hash(data, "sha256");
-const sha512Hash = hash(data, "sha512");
+const sha1Hash = await hash(data, "sha1");
+const sha512Hash = await hash(data, "sha512");
 ```
 
-### 对称加密解密（AES）
+### Symmetric Encryption and Decryption (AES)
 
 ```typescript
 import { encrypt, decrypt, generateKey } from "jsr:@dreamer/crypto";
 
-// 生成密钥
-const key = generateKey("aes-256"); // 生成 256 位密钥
-// 或使用自定义密钥
-const customKey = new Uint8Array(32); // 32 字节 = 256 位
+const key = await generateKey("aes-256");
+const plaintext = "sensitive data";
+const encrypted = await encrypt(plaintext, key, "aes-256-gcm");
+console.log(encrypted); // base64
 
-// 加密数据
-const plaintext = "敏感数据";
-const encrypted = encrypt(plaintext, key, "aes-256-gcm");
-console.log(encrypted); // base64 编码的加密数据
-
-// 解密数据
-const decrypted = decrypt(encrypted, key, "aes-256-gcm");
-console.log(decrypted); // "敏感数据"
-
-// 支持的算法
-const gcmEncrypted = encrypt(plaintext, key, "aes-256-gcm"); // 推荐，带认证
-const cbcEncrypted = encrypt(plaintext, key, "aes-256-cbc"); // 传统模式
+const decrypted = await decrypt(encrypted, key, "aes-256-gcm");
+console.log(decrypted); // "sensitive data"
 ```
 
-### 非对称加密解密（RSA）
+### JWT
+
+```typescript
+import { signJWT, verifyJWT, decodeJWT } from "jsr:@dreamer/crypto";
+
+const payload = { userId: 123, username: "alice", role: "admin" };
+const secret = "your-secret-key";
+
+const token = await signJWT(payload, secret, {
+  algorithm: "HS256",
+  expiresIn: "1h",
+  issuer: "my-app",
+  audience: "api-users",
+  subject: "user-123",
+});
+
+const decoded = await verifyJWT(token, secret);
+console.log(decoded); // { userId: 123, username: "alice", ... }
+
+const decodedOnly = decodeJWT(token);
+```
+
+### Random Number Generation
+
+```typescript
+import {
+  generateRandomBytes,
+  generateRandomString,
+  generateRandomInt,
+  generateUUID,
+} from "jsr:@dreamer/crypto";
+
+const randomBytes = generateRandomBytes(32);
+const randomString = generateRandomString(32);
+const randomInt = generateRandomInt(1, 100);
+const uuid = generateUUID();
+```
+
+---
+
+## 🎨 Examples
+
+### Asymmetric Encryption (RSA)
 
 ```typescript
 import {
   generateRSAKeyPair,
   encryptRSA,
-  decryptRSA
+  decryptRSA,
 } from "jsr:@dreamer/crypto";
 
-// 生成 RSA 密钥对
-const { publicKey, privateKey } = await generateRSAKeyPair(2048); // 2048 位密钥
-
-// 公钥加密
-const plaintext = "敏感数据";
+const { publicKey, privateKey } = await generateRSAKeyPair(2048);
+const plaintext = "sensitive data";
 const encrypted = await encryptRSA(plaintext, publicKey);
-console.log(encrypted); // base64 编码的加密数据
-
-// 私钥解密
 const decrypted = await decryptRSA(encrypted, privateKey);
-console.log(decrypted); // "敏感数据"
-
-// 导出密钥（PEM 格式）
-const publicKeyPEM = await exportPublicKey(publicKey, "pem");
-const privateKeyPEM = await exportPrivateKey(privateKey, "pem");
+console.log(decrypted); // "sensitive data"
 ```
 
-### 数字签名
+### Digital Signatures
 
 ```typescript
-import { sign, verify } from "jsr:@dreamer/crypto";
+import {
+  sign,
+  verify,
+  generateRSAKeyPair,
+  generateECDSAKeyPair,
+} from "jsr:@dreamer/crypto";
 
-// 生成密钥对
+// RSA
 const { publicKey, privateKey } = await generateRSAKeyPair(2048);
-
-// 签名数据
-const data = "重要文档";
+const data = "important document";
 const signature = await sign(data, privateKey, "rsa-sha256");
-console.log(signature); // base64 编码的签名
-
-// 验证签名
 const isValid = await verify(data, signature, publicKey, "rsa-sha256");
 console.log(isValid); // true
 
-// 使用 ECDSA（更高效）
+// ECDSA
 const { publicKey: ecdsaPublicKey, privateKey: ecdsaPrivateKey } =
   await generateECDSAKeyPair("P-256");
 const ecdsaSignature = await sign(data, ecdsaPrivateKey, "ecdsa-sha256");
-const isValidECDSA = await verify(data, ecdsaSignature, ecdsaPublicKey, "ecdsa-sha256");
+const isValidECDSA = await verify(
+  data,
+  ecdsaSignature,
+  ecdsaPublicKey,
+  "ecdsa-sha256",
+);
 ```
 
-### 密码哈希
+### Password Hashing
 
 ```typescript
 import { hashPassword, verifyPassword } from "jsr:@dreamer/crypto";
 
-// 方式1：使用 bcrypt（推荐，兼容性好）
-const password = "用户密码";
+const password = "user-password";
 const hashed = await hashPassword(password, "bcrypt", { rounds: 10 });
-console.log(hashed); // bcrypt 哈希字符串
-
-// 验证密码
 const isValid = await verifyPassword(password, hashed);
 console.log(isValid); // true
 
-// 方式2：使用 argon2（推荐，更安全）
 const argon2Hashed = await hashPassword(password, "argon2id", {
-  memoryCost: 65536, // 64 MB
-  timeCost: 3,       // 迭代次数
-  parallelism: 4,    // 并行度
+  memoryCost: 65536,
+  timeCost: 3,
+  parallelism: 4,
 });
 const isValidArgon2 = await verifyPassword(password, argon2Hashed);
 ```
 
-### JWT（JSON Web Token）
-
-```typescript
-import { signJWT, verifyJWT, decodeJWT } from "jsr:@dreamer/crypto";
-
-// 生成 JWT Token
-const payload = {
-  userId: 123,
-  username: "alice",
-  role: "admin",
-};
-
-const secret = "your-secret-key"; // 或使用 RSA 密钥对
-const token = await signJWT(payload, secret, {
-  algorithm: "HS256",
-  expiresIn: "1h",        // 1小时后过期
-  issuer: "my-app",       // 签发者
-  audience: "api-users",  // 受众
-  subject: "user-123",   // 主题
-});
-
-console.log(token); // JWT Token 字符串
-
-// 验证 JWT Token
-try {
-  const decoded = await verifyJWT(token, secret);
-  console.log(decoded); // { userId: 123, username: "alice", ... }
-} catch (error) {
-  console.error("Token 验证失败:", error);
-}
-
-// 仅解码（不验证）
-const decoded = decodeJWT(token);
-console.log(decoded); // { header: {...}, payload: {...}, signature: "..." }
-```
-
-### 随机数生成
-
-```typescript
-import { generateRandomBytes, generateRandomString } from "jsr:@dreamer/crypto";
-
-// 生成随机字节
-const randomBytes = generateRandomBytes(32); // 32 字节
-console.log(randomBytes); // Uint8Array
-
-// 生成随机字符串
-const randomString = generateRandomString(32); // 32 字符
-console.log(randomString); // 随机字符串
-
-// 生成随机整数
-const randomInt = generateRandomInt(1, 100); // 1 到 100 之间的随机数
-console.log(randomInt);
-
-// 生成 UUID
-const uuid = generateUUID();
-console.log(uuid); // UUID v4 格式
-```
-
----
-
-## 📚 API 文档
+### Full Application Example
 
 ```typescript
 import {
@@ -259,164 +236,182 @@ import {
   verifyJWT,
 } from "jsr:@dreamer/crypto";
 
-// 1. 用户注册：密码哈希
 async function registerUser(username: string, password: string) {
-  const hashedPassword = await hashPassword(password, "bcrypt", { rounds: 10 });
-  // 存储到数据库
+  const hashedPassword = await hashPassword(password, "bcrypt", {
+    rounds: 10,
+  });
   await saveUser({ username, password: hashedPassword });
 }
 
-// 2. 用户登录：密码验证 + JWT 生成
 async function loginUser(username: string, password: string) {
   const user = await findUser(username);
   const isValid = await verifyPassword(password, user.password);
-
   if (isValid) {
-    // 生成 JWT Token
     const token = await signJWT(
       { userId: user.id, username: user.username },
       process.env.JWT_SECRET!,
-      { expiresIn: "24h" }
+      { expiresIn: "24h" },
     );
     return { token };
-  } else {
-    throw new Error("密码错误");
   }
+  throw new Error("Invalid password");
 }
 
-// 3. 数据加密存储
 async function saveSensitiveData(data: string) {
-  const key = generateKey("aes-256");
-  const encrypted = encrypt(data, key, "aes-256-gcm");
-  // 存储加密后的数据和密钥（密钥需要安全存储）
-  await saveToDatabase({ encrypted, keyId: key.id });
+  const key = await generateKey("aes-256");
+  const encrypted = await encrypt(data, key, "aes-256-gcm");
+  await saveToDatabase({ encrypted }); // store key securely elsewhere
 }
 
-// 4. 数据解密
-async function getSensitiveData(keyId: string) {
-  const { encrypted, key } = await loadFromDatabase(keyId);
-  const decrypted = decrypt(encrypted, key, "aes-256-gcm");
-  return decrypted;
-}
-
-// 5. API 请求验证
 async function verifyRequest(token: string) {
-  try {
-    const payload = await verifyJWT(token, process.env.JWT_SECRET!);
-    return payload; // { userId, username, ... }
-  } catch (error) {
-    throw new Error("Token 无效");
-  }
+  const payload = await verifyJWT(token, process.env.JWT_SECRET!);
+  return payload;
 }
 ```
 
 ---
 
-## 📚 API 文档
+## 📚 API Documentation
 
-### 哈希算法
+### Hash Algorithm
 
-- `hash(data: string, algorithm: string)`: 计算哈希值
-- `verifyHash(data: string, hash: string, algorithm: string)`: 验证哈希值
+| Method | Description |
+| ------ | ----------- |
+| `hash(data, algorithm?): Promise<string>` | Compute hash |
+| `verifyHash(data, hash, algorithm): Promise<boolean>` | Verify hash |
 
-**支持的算法**：`md5`、`sha1`、`sha256`、`sha512`
+**Algorithms**: `sha1`, `sha256`, `sha512` (MD5 rejected)
 
-### 对称加密解密
+### Symmetric Encryption and Decryption
 
-- `encrypt(plaintext: string, key: Uint8Array, algorithm: string)`: 加密数据
-- `decrypt(ciphertext: string, key: Uint8Array, algorithm: string)`: 解密数据
-- `generateKey(algorithm: string)`: 生成密钥
+| Method | Description |
+| ------ | ----------- |
+| `encrypt(plaintext, key, algorithm?): Promise<string>` | Encrypt |
+| `decrypt(ciphertext, key, algorithm?): Promise<string>` | Decrypt |
+| `generateKey(algorithm): Promise<CryptoKey>` | Generate AES key |
+| `importAESKey(keyData, algorithm?): Promise<CryptoKey>` | Import key from bytes |
 
-**支持的算法**：`aes-128-gcm`、`aes-256-gcm`、`aes-128-cbc`、`aes-256-cbc`
+**Algorithms**: `aes-128-gcm`, `aes-256-gcm`, `aes-128-cbc`, `aes-256-cbc`
 
-### 非对称加密解密
+### Asymmetric Encryption and Decryption
 
-- `generateRSAKeyPair(bits: number)`: 生成 RSA 密钥对
-- `encryptRSA(plaintext: string, publicKey: CryptoKey)`: 公钥加密（使用 RSA-OAEP 算法）
-- `decryptRSA(ciphertext: string, privateKey: CryptoKey)`: 私钥解密（使用 RSA-OAEP 算法）
+| Method | Description |
+| ------ | ----------- |
+| `generateRSAKeyPair(bits?): Promise<{ publicKey, privateKey }>` | Generate RSA key pair |
+| `encryptRSA(plaintext, publicKey): Promise<string>` | Encrypt with public key |
+| `decryptRSA(ciphertext, privateKey): Promise<string>` | Decrypt with private key |
 
-### 数字签名
+### Digital Signatures
 
-- `sign(data: string, privateKey: CryptoKey, algorithm: string)`: 签名数据
-- `verify(data: string, signature: string, publicKey: CryptoKey, algorithm: string)`: 验证签名
+| Method | Description |
+| ------ | ----------- |
+| `sign(data, privateKey, algorithm): Promise<string>` | Sign |
+| `verify(data, signature, publicKey, algorithm): Promise<boolean>` | Verify |
 
-**支持的算法**：`rsa-sha256`、`ecdsa-sha256`
+**Algorithms**: `rsa-sha256`, `rsa-sha384`, `rsa-sha512`, `ecdsa-sha256`, `ecdsa-sha384`, `ecdsa-sha512`
 
-### 密码哈希
+### Password Hashing
 
-- `hashPassword(password: string, algorithm: string, options?)`: 哈希密码
-- `verifyPassword(password: string, hashed: string)`: 验证密码
+| Method | Description |
+| ------ | ----------- |
+| `hashPassword(password, algorithm, options?): Promise<string>` | Hash password |
+| `verifyPassword(password, hashed): Promise<boolean>` | Verify password |
 
-**支持的算法**：`bcrypt`、`argon2id`、`argon2i`、`argon2d`
+**Algorithms**: `bcrypt`, `argon2id`, `argon2i`, `argon2d`
 
 ### JWT
 
-- `signJWT(payload: object, secret: string | CryptoKey, options?)`: 生成 JWT Token
-- `verifyJWT(token: string, secret: string | CryptoKey)`: 验证 JWT Token
-- `decodeJWT(token: string)`: 解码 JWT Token（不验证）
+| Method | Description |
+| ------ | ----------- |
+| `signJWT(payload, secret, options?): Promise<string>` | Sign JWT |
+| `verifyJWT(token, secret): Promise<JWTPayload>` | Verify JWT |
+| `decodeJWT(token)` | Decode JWT (no verification) |
 
-**支持的算法**：`HS256`、`HS384`、`HS512`、`RS256`、`RS384`、`RS512`、`ES256`、`ES384`、`ES512`
+**Algorithms**: `HS256`, `HS384`, `HS512`, `RS256`, `RS384`, `RS512`, `ES256`, `ES384`, `ES512`
 
-### 随机数生成
+### Random Number Generation
 
-- `generateRandomBytes(length: number)`: 生成随机字节
-- `generateRandomString(length: number)`: 生成随机字符串
-- `generateRandomInt(min: number, max: number)`: 生成随机整数
-- `generateUUID()`: 生成 UUID v4
-
----
-
-## ⚠️ 安全注意事项
-
-### 密钥管理
-
-- ✅ **密钥存储**：密钥应存储在安全的地方（环境变量、密钥管理服务）
-- ✅ **密钥轮换**：定期更换密钥，特别是对称加密密钥
-- ✅ **密钥长度**：使用足够长的密钥（AES 至少 256 位，RSA 至少 2048 位）
-- ❌ **不要硬编码密钥**：不要在代码中硬编码密钥
-- ❌ **不要提交密钥**：不要将密钥提交到版本控制系统
-
-### 密码哈希
-
-- ✅ **使用专用算法**：使用 bcrypt 或 argon2，不要使用普通哈希算法（MD5、SHA256）
-- ✅ **足够的成本参数**：bcrypt rounds 至少 10，argon2 根据性能调整
-- ✅ **加盐**：算法会自动加盐，不需要手动加盐
-- ❌ **不要使用 MD5/SHA256**：这些算法不适合密码哈希
-
-### 加密算法选择
-
-- ✅ **对称加密**：大量数据使用 AES-256-GCM（推荐）
-- ✅ **非对称加密**：密钥交换使用 RSA-OAEP（推荐）
-- ✅ **数字签名**：使用 RSA 或 ECDSA
-- ❌ **避免弱算法**：避免使用 DES、RC4 等弱算法
-
-### JWT 安全
-
-- ✅ **使用强密钥**：HS256 至少 256 位，RS256 至少 2048 位
-- ✅ **设置过期时间**：所有 Token 都应该有过期时间
-- ✅ **验证签名**：始终验证 Token 签名
-- ❌ **不要在客户端存储敏感信息**：JWT 载荷可以被解码（但不验证签名）
+| Method | Description |
+| ------ | ----------- |
+| `generateRandomBytes(length): Uint8Array` | Random bytes |
+| `generateRandomString(length, charset?): string` | Random string |
+| `generateRandomInt(min, max): number` | Random int |
+| `generateUUID(): string` | UUID v4 |
 
 ---
 
-## 📝 备注
+## 🔧 Advanced Configuration
 
-- 所有加密操作都是异步的，使用 `await` 等待结果
-- 密钥和敏感数据应安全存储，不要硬编码
-- 生产环境建议使用密钥管理服务（如 AWS KMS、Azure Key Vault）
-- 定期更新加密算法和密钥，保持安全性
+### Security Notes
+
+#### Key Management
+
+- ✅ **Key storage**: Store keys securely (env vars, KMS)
+- ✅ **Key rotation**: Rotate keys regularly, especially symmetric keys
+- ✅ **Key length**: AES at least 256-bit, RSA at least 2048-bit
+- ❌ **Do not hardcode keys**: Never hardcode keys in code
+- ❌ **Do not commit keys**: Do not commit keys to version control
+
+#### Password Hashing
+
+- ✅ **Use dedicated algorithms**: Use bcrypt or argon2, not plain hash (MD5, SHA256)
+- ✅ **Sufficient cost**: bcrypt rounds at least 10
+- ✅ **Salting**: Automatic salting
+- ❌ **Do not use MD5/SHA256**: These are not suitable for password hashing
+
+#### Algorithm Selection
+
+- ✅ **Symmetric**: AES-256-GCM for bulk data (recommended)
+- ✅ **Asymmetric**: RSA-OAEP for key exchange
+- ✅ **Signatures**: RSA or ECDSA
+- ❌ **Avoid weak algorithms**: Avoid DES, RC4, etc.
+
+#### JWT Security
+
+- ✅ **Strong keys**: HS256 at least 256-bit, RS256 at least 2048-bit
+- ✅ **Expiration**: All tokens should have expiration
+- ✅ **Verify signatures**: Always verify token signatures
+- ❌ **Do not store sensitive data in payload**: JWT payload is decodable
 
 ---
 
-## 🤝 贡献
+## 📊 Test Report
 
-欢迎提交 Issue 和 Pull Request！
+[![Tests](https://img.shields.io/badge/tests-70%20passed-brightgreen)](./TEST_REPORT.md)
+
+| Metric | Value |
+| ------ | ----- |
+| **Total** | 70 |
+| **Passed** | 70 |
+| **Failed** | 0 |
+| **Pass Rate** | 100% |
+| **Execution Time** | ~5s |
+| **Environment** | Deno 2.5+, Bun 1.0+ |
+
+**Coverage**: Hash, verify, random, AES keys, symmetric encryption, RSA/ECDSA key pairs, RSA encryption, signatures, JWT, edge cases, security validation.
+
+See [TEST_REPORT.md](./TEST_REPORT.md) for details.
 
 ---
 
-## 📄 许可证
+## 📝 Notes
 
-MIT License - 详见 [LICENSE.md](./LICENSE.md)
+- All crypto operations are async; use `await`
+- Store keys and sensitive data securely; do not hardcode
+- Use a key management service in production (e.g. AWS KMS, Azure Key Vault)
+- Rotate algorithms and keys periodically
+
+---
+
+## 🤝 Contributing
+
+Issues and Pull Requests welcome!
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE.md](./LICENSE.md)
 
 ---
 
