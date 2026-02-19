@@ -1,0 +1,18 @@
+{
+  "error": {
+    "md5NotSupported": "MD5 不支持 Web Crypto API，请使用其他算法",
+    "unsupportedHashAlgorithm": "不支持的哈希算法: {algorithm}",
+    "unsupportedSignatureAlgorithm": "不支持的签名算法: {algorithm}",
+    "invalidTimeFormat": "无效的时间格式: {timeStr}",
+    "unsupportedTimeUnit": "不支持的时间单位: {unit}",
+    "rsaEcdsaRequiresCryptoKey": "RSA/ECDSA 算法需要使用 CryptoKey",
+    "unsupportedJWTAlgorithm": "不支持的 JWT 算法: {algorithm}",
+    "invalidJWTTokenFormat": "无效的 JWT Token 格式",
+    "invalidJWTTokenType": "无效的 JWT Token 类型",
+    "jwtSignatureVerificationFailed": "JWT Token 签名验证失败",
+    "jwtExpired": "JWT Token 已过期",
+    "jwtNotYetValid": "JWT Token 尚未生效",
+    "passwordHashRequiresExternal": "密码哈希算法 {algorithm} 需要外部库支持。请使用专门的密码哈希库（如 npm:bcrypt 或 npm:argon2）。",
+    "passwordVerifyRequiresExternal": "密码验证需要外部库支持。请使用专门的密码哈希库（如 npm:bcrypt 或 npm:argon2）。"
+  }
+}

@@ -33,6 +33,11 @@
  * ```
  */
 
+import { $tr } from "./i18n.ts";
+
+/** 导出 i18n：供调用方设置语言或检测当前语言 */
+export { detectLocale, type Locale, setCryptoLocale } from "./i18n.ts";
+
 /**
  * 哈希算法类型
  */
@@ -203,7 +208,7 @@ function _hexToArrayBuffer(hex: string): ArrayBuffer {
 function getWebCryptoHashAlgorithm(algorithm: HashAlgorithm): string {
   switch (algorithm) {
     case "md5":
-      throw new Error("MD5 不支持 Web Crypto API，请使用其他算法");
+      throw new Error($tr("error.md5NotSupported"));
     case "sha1":
       return "SHA-1";
     case "sha256":
@@ -211,7 +216,7 @@ function getWebCryptoHashAlgorithm(algorithm: HashAlgorithm): string {
     case "sha512":
       return "SHA-512";
     default:
-      throw new Error(`不支持的哈希算法: ${algorithm}`);
+      throw new Error($tr("error.unsupportedHashAlgorithm", { algorithm }));
   }
 }
 
@@ -590,7 +595,7 @@ export async function sign(
     );
     signAlg = "ECDSA";
   } else {
-    throw new Error(`不支持的签名算法: ${algorithm}`);
+    throw new Error($tr("error.unsupportedSignatureAlgorithm", { algorithm }));
   }
 
   const signature = await crypto.subtle.sign(
@@ -640,7 +645,7 @@ export async function verify(
     );
     signAlg = "ECDSA";
   } else {
-    throw new Error(`不支持的签名算法: ${algorithm}`);
+    throw new Error($tr("error.unsupportedSignatureAlgorithm", { algorithm }));
   }
 
   return await crypto.subtle.verify(
@@ -678,7 +683,7 @@ function base64UrlDecode(str: string): string {
 function parseTimeString(timeStr: string): number {
   const match = timeStr.match(/^(\d+)([smhd])$/);
   if (!match) {
-    throw new Error(`无效的时间格式: ${timeStr}`);
+    throw new Error($tr("error.invalidTimeFormat", { timeStr }));
   }
 
   const value = parseInt(match[1], 10);
@@ -694,7 +699,7 @@ function parseTimeString(timeStr: string): number {
     case "d":
       return value * 24 * 60 * 60;
     default:
-      throw new Error(`不支持的时间单位: ${unit}`);
+      throw new Error($tr("error.unsupportedTimeUnit", { unit }));
   }
 }
 
@@ -791,7 +796,7 @@ export async function signJWT(
   } else if (algorithm.startsWith("RS") || algorithm.startsWith("ES")) {
     // RSA 或 ECDSA 签名
     if (!(secret instanceof CryptoKey)) {
-      throw new Error("RSA/ECDSA 算法需要使用 CryptoKey");
+      throw new Error($tr("error.rsaEcdsaRequiresCryptoKey"));
     }
 
     const hashAlg = algorithm === "RS256" || algorithm === "ES256"
@@ -812,7 +817,7 @@ export async function signJWT(
     );
     signature = base64UrlEncode(arrayBufferToBase64(signatureBuffer));
   } else {
-    throw new Error(`不支持的 JWT 算法: ${algorithm}`);
+    throw new Error($tr("error.unsupportedJWTAlgorithm", { algorithm }));
   }
 
   return `${encodedHeader}.${encodedPayload}.${signature}`;
@@ -831,7 +836,7 @@ export async function verifyJWT(
 ): Promise<JWTPayload> {
   const parts = token.split(".");
   if (parts.length !== 3) {
-    throw new Error("无效的 JWT Token 格式");
+    throw new Error($tr("error.invalidJWTTokenFormat"));
   }
 
   const [encodedHeader, encodedPayload, encodedSignature] = parts;
@@ -842,7 +847,7 @@ export async function verifyJWT(
   ) as { alg: string; typ: string };
 
   if (header.typ !== "JWT") {
-    throw new Error("无效的 JWT Token 类型");
+    throw new Error($tr("error.invalidJWTTokenType"));
   }
 
   const algorithm = header.alg;
@@ -886,7 +891,7 @@ export async function verifyJWT(
   } else if (algorithm.startsWith("RS") || algorithm.startsWith("ES")) {
     // RSA 或 ECDSA 验证
     if (!(secret instanceof CryptoKey)) {
-      throw new Error("RSA/ECDSA 算法需要使用 CryptoKey");
+      throw new Error($tr("error.rsaEcdsaRequiresCryptoKey"));
     }
 
     const hashAlg = algorithm === "RS256" || algorithm === "ES256"
@@ -907,11 +912,11 @@ export async function verifyJWT(
       stringToArrayBuffer(dataToVerify),
     );
   } else {
-    throw new Error(`不支持的 JWT 算法: ${algorithm}`);
+    throw new Error($tr("error.unsupportedJWTAlgorithm", { algorithm }));
   }
 
   if (!isValid) {
-    throw new Error("JWT Token 签名验证失败");
+    throw new Error($tr("error.jwtSignatureVerificationFailed"));
   }
 
   // 解码 Payload
@@ -922,12 +927,12 @@ export async function verifyJWT(
   // 验证过期时间
   const now = Math.floor(Date.now() / 1000);
   if (payload.exp && payload.exp < now) {
-    throw new Error("JWT Token 已过期");
+    throw new Error($tr("error.jwtExpired"));
   }
 
   // 验证生效时间
   if (payload.nbf && payload.nbf > now) {
-    throw new Error("JWT Token 尚未生效");
+    throw new Error($tr("error.jwtNotYetValid"));
   }
 
   return payload;
@@ -946,7 +951,7 @@ export function decodeJWT(token: string): {
 } {
   const parts = token.split(".");
   if (parts.length !== 3) {
-    throw new Error("无效的 JWT Token 格式");
+    throw new Error($tr("error.invalidJWTTokenFormat"));
   }
 
   const [encodedHeader, encodedPayload, encodedSignature] = parts;
@@ -982,9 +987,7 @@ export function hashPassword(
   // 注意：这里需要依赖外部库来实现 bcrypt 和 argon2
   // 由于 Deno 标准库不包含这些，这里抛出错误提示
   return Promise.reject(
-    new Error(
-      `密码哈希算法 ${algorithm} 需要外部库支持。请使用专门的密码哈希库（如 npm:bcrypt 或 npm:argon2）`,
-    ),
+    new Error($tr("error.passwordHashRequiresExternal", { algorithm })),
   );
 }
 
@@ -1001,8 +1004,6 @@ export function verifyPassword(
 ): Promise<boolean> {
   // 注意：这里需要依赖外部库来实现 bcrypt 和 argon2
   return Promise.reject(
-    new Error(
-      "密码验证需要外部库支持。请使用专门的密码哈希库（如 npm:bcrypt 或 npm:argon2）",
-    ),
+    new Error($tr("error.passwordVerifyRequiresExternal")),
   );
 }

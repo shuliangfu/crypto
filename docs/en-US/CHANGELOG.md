@@ -7,11 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.0.1] - 2026-02-19
+
+### Added
+
+- **Internationalization (i18n)** via `@dreamer/i18n`: all runtime error
+  messages (hash, signature, JWT, password hashing, time parsing) are now
+  localized.
+- **Locale API**: `setCryptoLocale(locale)`, `detectLocale()`, and `Locale` type
+  exported from the main entry; locale is detected from `LANGUAGE` / `LC_ALL` /
+  `LANG` when not set.
+- **Locale files**: `src/locales/zh-CN.json` and `src/locales/en-US.json` with
+  `error.*` keys for all package error messages.
+
+### Changed
+
+- Error messages no longer use hardcoded English strings; they use the internal
+  `$tr("error.*")` so that callers can switch language with
+  `setCryptoLocale("zh-CN")` or `setCryptoLocale("en-US")`.
+
+---
+
 ## [1.0.0] - 2026-02-06
 
 ### Added
 
-First stable release. Encryption and security utility library compatible with Deno and Bun. Built on Web Crypto API, no external dependencies for core features.
+First stable release. Encryption and security utility library compatible with
+Deno and Bun. Built on Web Crypto API, no external dependencies for core
+features.
 
 #### Hash
 
@@ -34,7 +57,8 @@ First stable release. Encryption and security utility library compatible with De
 
 #### Digital Signatures
 
-- **sign / verify**: RSA (RSA-SHA256, RSA-SHA384, RSA-SHA512) and ECDSA (P-256, P-384, P-521)
+- **sign / verify**: RSA (RSA-SHA256, RSA-SHA384, RSA-SHA512) and ECDSA (P-256,
+  P-384, P-521)
 - **generateRSASigningKeyPair(modulusLength?)**: RSA signing key pair
 - **generateECDSAKeyPair(namedCurve?)**: ECDSA key pair (P-256, P-384, P-521)
 
@@ -47,19 +71,23 @@ First stable release. Encryption and security utility library compatible with De
 
 #### JWT (JSON Web Token)
 
-- **signJWT(payload, secret, options?)**: Sign JWT with HS256/384/512, RS256/384/512, ES256/384/512
+- **signJWT(payload, secret, options?)**: Sign JWT with HS256/384/512,
+  RS256/384/512, ES256/384/512
 - **verifyJWT(token, secret)**: Verify and decode JWT
 - **decodeJWT(token)**: Decode without verification
 - Options: expiresIn, issuer, audience, subject, issuedAt, notBefore
 
 #### Password Hashing (Interface)
 
-- **hashPassword / verifyPassword**: Interface for bcrypt and argon2 (argon2id, argon2i, argon2d)
-- Requires external library for implementation (Web Crypto API does not support bcrypt/argon2)
+- **hashPassword / verifyPassword**: Interface for bcrypt and argon2 (argon2id,
+  argon2i, argon2d)
+- Requires external library for implementation (Web Crypto API does not support
+  bcrypt/argon2)
 
 #### Type Exports
 
-- `HashAlgorithm`, `SymmetricAlgorithm`, `SignatureAlgorithm`, `PasswordHashAlgorithm`, `JWTOptions`, `JWTPayload`, `PasswordHashOptions`
+- `HashAlgorithm`, `SymmetricAlgorithm`, `SignatureAlgorithm`,
+  `PasswordHashAlgorithm`, `JWTOptions`, `JWTPayload`, `PasswordHashOptions`
 
 #### Client Module
 

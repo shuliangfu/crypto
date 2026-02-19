@@ -1,18 +1,26 @@
 # @dreamer/crypto
 
-> 一个兼容 Deno 和 Bun 的加密和安全工具库，提供哈希、加密解密、签名验证、JWT 等功能
+> 一个兼容 Deno 和 Bun 的加密和安全工具包，提供哈希、加密解密、签名验证、JWT
+> 等功能
 
-[English](./README.md) | 中文 (Chinese)
+[English](../../README.md) | 中文 (Chinese)
 
 [![JSR](https://jsr.io/badges/@dreamer/crypto)](https://jsr.io/@dreamer/crypto)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](../../LICENSE)
 [![Tests](https://img.shields.io/badge/tests-70%20passed-brightgreen)](./TEST_REPORT.md)
+
+**变更日志**（最新）：[1.0.1] - 2026-02-19 — 新增：国际化（i18n）、语言
+API（`setCryptoLocale`、`detectLocale`）、语言包（zh-CN、en-US）。变更：错误信息改为本地化。完整历史：[English](../en-US/CHANGELOG.md)
+| [中文](./CHANGELOG.md)
 
 ---
 
 ## 🎯 功能
 
-一个功能完整的加密和安全工具库，提供哈希算法、对称/非对称加密解密、数字签名、JWT 令牌、密码哈希、随机数生成等全面的安全功能。基于 Web Crypto API 标准实现，**全面兼容 Deno 和 Bun 运行时环境**，适用于数据加密存储、身份验证、安全通信、密码管理等各类安全场景。
+一个功能完整的加密和安全工具包，提供哈希算法、对称/非对称加密解密、数字签名、JWT
+令牌、密码哈希、随机数生成等全面的安全功能。基于 Web Crypto API
+标准实现，**全面兼容 Deno 和 Bun
+运行时环境**，适用于数据加密存储、身份验证、安全通信、密码管理等各类安全场景。
 
 ---
 
@@ -34,13 +42,13 @@ bunx jsr add @dreamer/crypto
 
 ## 🌍 环境兼容性
 
-| 环境       | 版本要求 | 状态                                                                 |
-| ---------- | -------- | -------------------------------------------------------------------- |
-| **Deno**   | 2.5+     | ✅ 完全支持                                                           |
-| **Bun**    | 1.0+     | ✅ 完全支持                                                           |
-| **服务端** | -        | ✅ 支持（兼容 Deno 和 Bun 运行时，使用 Web Crypto API）               |
-| **客户端** | -        | ✅ 支持（浏览器环境，使用 Web Crypto API）                           |
-| **依赖**   | -        | 📦 无外部依赖（基于 Web Crypto API 标准）                            |
+| 环境       | 版本要求 | 状态                                                    |
+| ---------- | -------- | ------------------------------------------------------- |
+| **Deno**   | 2.5+     | ✅ 完全支持                                             |
+| **Bun**    | 1.0+     | ✅ 完全支持                                             |
+| **服务端** | -        | ✅ 支持（兼容 Deno 和 Bun 运行时，使用 Web Crypto API） |
+| **客户端** | -        | ✅ 支持（浏览器环境，使用 Web Crypto API）              |
+| **依赖**   | -        | 📦 无外部依赖（基于 Web Crypto API 标准）               |
 
 ---
 
@@ -110,7 +118,7 @@ const sha512Hash = await hash(data, "sha512");
 ### 对称加密解密（AES）
 
 ```typescript
-import { encrypt, decrypt, generateKey } from "jsr:@dreamer/crypto";
+import { decrypt, encrypt, generateKey } from "jsr:@dreamer/crypto";
 
 // 生成密钥
 const key = await generateKey("aes-256");
@@ -128,7 +136,7 @@ console.log(decrypted); // "敏感数据"
 ### JWT
 
 ```typescript
-import { signJWT, verifyJWT, decodeJWT } from "jsr:@dreamer/crypto";
+import { decodeJWT, signJWT, verifyJWT } from "jsr:@dreamer/crypto";
 
 const payload = { userId: 123, username: "alice", role: "admin" };
 const secret = "your-secret-key";
@@ -155,8 +163,8 @@ const decodedOnly = decodeJWT(token);
 ```typescript
 import {
   generateRandomBytes,
-  generateRandomString,
   generateRandomInt,
+  generateRandomString,
   generateUUID,
 } from "jsr:@dreamer/crypto";
 
@@ -174,9 +182,9 @@ const uuid = generateUUID();
 
 ```typescript
 import {
-  generateRSAKeyPair,
-  encryptRSA,
   decryptRSA,
+  encryptRSA,
+  generateRSAKeyPair,
 } from "jsr:@dreamer/crypto";
 
 // 生成 RSA 密钥对
@@ -195,10 +203,10 @@ console.log(decrypted); // "敏感数据"
 
 ```typescript
 import {
+  generateECDSAKeyPair,
+  generateRSAKeyPair,
   sign,
   verify,
-  generateRSAKeyPair,
-  generateECDSAKeyPair,
 } from "jsr:@dreamer/crypto";
 
 // RSA 签名
@@ -244,13 +252,13 @@ const isValidArgon2 = await verifyPassword(password, argon2Hashed);
 
 ```typescript
 import {
-  hashPassword,
-  verifyPassword,
-  encrypt,
   decrypt,
+  encrypt,
   generateKey,
+  hashPassword,
   signJWT,
   verifyJWT,
+  verifyPassword,
 } from "jsr:@dreamer/crypto";
 
 // 1. 用户注册：密码哈希
@@ -297,68 +305,68 @@ async function verifyRequest(token: string) {
 
 ### 哈希算法
 
-| 方法 | 说明 |
-| ------ | ------ |
-| `hash(data: string, algorithm?: HashAlgorithm): Promise<string>` | 计算哈希值 |
+| 方法                                                                                 | 说明       |
+| ------------------------------------------------------------------------------------ | ---------- |
+| `hash(data: string, algorithm?: HashAlgorithm): Promise<string>`                     | 计算哈希值 |
 | `verifyHash(data: string, hash: string, algorithm: HashAlgorithm): Promise<boolean>` | 验证哈希值 |
 
 **支持的算法**：`sha1`、`sha256`、`sha512`（MD5 已拒绝）
 
 ### 对称加密解密
 
-| 方法 | 说明 |
-| ------ | ------ |
-| `encrypt(plaintext: string, key: CryptoKey \| Uint8Array, algorithm?: SymmetricAlgorithm): Promise<string>` | 加密数据 |
-| `decrypt(ciphertext: string, key: CryptoKey \| Uint8Array, algorithm?: SymmetricAlgorithm): Promise<string>` | 解密数据 |
-| `generateKey(algorithm: "aes-128" \| "aes-256"): Promise<CryptoKey>` | 生成 AES 密钥 |
-| `importAESKey(keyData: Uint8Array, algorithm?: SymmetricAlgorithm): Promise<CryptoKey>` | 从字节导入密钥 |
+| 方法                                                                                                         | 说明           |
+| ------------------------------------------------------------------------------------------------------------ | -------------- |
+| `encrypt(plaintext: string, key: CryptoKey \| Uint8Array, algorithm?: SymmetricAlgorithm): Promise<string>`  | 加密数据       |
+| `decrypt(ciphertext: string, key: CryptoKey \| Uint8Array, algorithm?: SymmetricAlgorithm): Promise<string>` | 解密数据       |
+| `generateKey(algorithm: "aes-128" \| "aes-256"): Promise<CryptoKey>`                                         | 生成 AES 密钥  |
+| `importAESKey(keyData: Uint8Array, algorithm?: SymmetricAlgorithm): Promise<CryptoKey>`                      | 从字节导入密钥 |
 
 **支持的算法**：`aes-128-gcm`、`aes-256-gcm`、`aes-128-cbc`、`aes-256-cbc`
 
 ### 非对称加密解密
 
-| 方法 | 说明 |
-| ------ | ------ |
-| `generateRSAKeyPair(bits?: number): Promise<{ publicKey, privateKey }>` | 生成 RSA 密钥对（默认 2048） |
-| `encryptRSA(plaintext: string, publicKey: CryptoKey): Promise<string>` | 公钥加密（RSA-OAEP） |
-| `decryptRSA(ciphertext: string, privateKey: CryptoKey): Promise<string>` | 私钥解密 |
+| 方法                                                                     | 说明                         |
+| ------------------------------------------------------------------------ | ---------------------------- |
+| `generateRSAKeyPair(bits?: number): Promise<{ publicKey, privateKey }>`  | 生成 RSA 密钥对（默认 2048） |
+| `encryptRSA(plaintext: string, publicKey: CryptoKey): Promise<string>`   | 公钥加密（RSA-OAEP）         |
+| `decryptRSA(ciphertext: string, privateKey: CryptoKey): Promise<string>` | 私钥解密                     |
 
 ### 数字签名
 
-| 方法 | 说明 |
-| ------ | ------ |
-| `sign(data: string, privateKey: CryptoKey, algorithm: SignatureAlgorithm): Promise<string>` | 签名数据 |
+| 方法                                                                                                             | 说明     |
+| ---------------------------------------------------------------------------------------------------------------- | -------- |
+| `sign(data: string, privateKey: CryptoKey, algorithm: SignatureAlgorithm): Promise<string>`                      | 签名数据 |
 | `verify(data: string, signature: string, publicKey: CryptoKey, algorithm: SignatureAlgorithm): Promise<boolean>` | 验证签名 |
 
 **支持的算法**：`rsa-sha256`、`rsa-sha384`、`rsa-sha512`、`ecdsa-sha256`、`ecdsa-sha384`、`ecdsa-sha512`
 
 ### 密码哈希
 
-| 方法 | 说明 |
-| ------ | ------ |
+| 方法                                                                                          | 说明     |
+| --------------------------------------------------------------------------------------------- | -------- |
 | `hashPassword(password: string, algorithm: PasswordHashAlgorithm, options?): Promise<string>` | 哈希密码 |
-| `verifyPassword(password: string, hashed: string): Promise<boolean>` | 验证密码 |
+| `verifyPassword(password: string, hashed: string): Promise<boolean>`                          | 验证密码 |
 
 **支持的算法**：`bcrypt`、`argon2id`、`argon2i`、`argon2d`
 
 ### JWT
 
-| 方法 | 说明 |
-| ------ | ------ |
-| `signJWT(payload: object, secret: string \| CryptoKey, options?): Promise<string>` | 生成 JWT |
-| `verifyJWT(token: string, secret: string \| CryptoKey): Promise<JWTPayload>` | 验证 JWT |
-| `decodeJWT(token: string): { header, payload, signature }` | 解码 JWT（不验证） |
+| 方法                                                                               | 说明               |
+| ---------------------------------------------------------------------------------- | ------------------ |
+| `signJWT(payload: object, secret: string \| CryptoKey, options?): Promise<string>` | 生成 JWT           |
+| `verifyJWT(token: string, secret: string \| CryptoKey): Promise<JWTPayload>`       | 验证 JWT           |
+| `decodeJWT(token: string): { header, payload, signature }`                         | 解码 JWT（不验证） |
 
 **支持的算法**：`HS256`、`HS384`、`HS512`、`RS256`、`RS384`、`RS512`、`ES256`、`ES384`、`ES512`
 
 ### 随机数生成
 
-| 方法 | 说明 |
-| ------ | ------ |
-| `generateRandomBytes(length: number): Uint8Array` | 生成随机字节 |
+| 方法                                                             | 说明           |
+| ---------------------------------------------------------------- | -------------- |
+| `generateRandomBytes(length: number): Uint8Array`                | 生成随机字节   |
 | `generateRandomString(length: number, charset?: string): string` | 生成随机字符串 |
-| `generateRandomInt(min: number, max: number): number` | 生成随机整数 |
-| `generateUUID(): string` | 生成 UUID v4 |
+| `generateRandomInt(min: number, max: number): number`            | 生成随机整数   |
+| `generateUUID(): string`                                         | 生成 UUID v4   |
 
 ---
 
@@ -401,16 +409,17 @@ async function verifyRequest(token: string) {
 
 [![Tests](https://img.shields.io/badge/tests-70%20passed-brightgreen)](./TEST_REPORT.md)
 
-| 指标 | 值 |
-| ------ | ----- |
-| **总测试数** | 70 |
-| **通过** | 70 |
-| **失败** | 0 |
-| **通过率** | 100% |
-| **测试执行时间** | ~5 秒 |
-| **测试环境** | Deno 2.5+, Bun 1.0+ |
+| 指标             | 值                  |
+| ---------------- | ------------------- |
+| **总测试数**     | 70                  |
+| **通过**         | 70                  |
+| **失败**         | 0                   |
+| **通过率**       | 100%                |
+| **测试执行时间** | ~5 秒               |
+| **测试环境**     | Deno 2.5+, Bun 1.0+ |
 
-**测试覆盖**：哈希、哈希验证、随机数生成、AES 密钥、对称加解密、RSA/ECDSA 密钥对、RSA 加解密、数字签名、JWT 生成/验证/解码、边界情况与安全验证。
+**测试覆盖**：哈希、哈希验证、随机数生成、AES 密钥、对称加解密、RSA/ECDSA
+密钥对、RSA 加解密、数字签名、JWT 生成/验证/解码、边界情况与安全验证。
 
 详细测试报告请查看 [TEST_REPORT.md](./TEST_REPORT.md)
 
@@ -433,7 +442,7 @@ async function verifyRequest(token: string) {
 
 ## 📄 许可证
 
-MIT License - 详见 [LICENSE.md](./LICENSE.md)
+Apache License 2.0 - 详见 [LICENSE](../../LICENSE)
 
 ---
 

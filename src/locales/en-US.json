@@ -1,0 +1,18 @@
+{
+  "error": {
+    "md5NotSupported": "MD5 is not supported by Web Crypto API. Please use another algorithm.",
+    "unsupportedHashAlgorithm": "Unsupported hash algorithm: {algorithm}",
+    "unsupportedSignatureAlgorithm": "Unsupported signature algorithm: {algorithm}",
+    "invalidTimeFormat": "Invalid time format: {timeStr}",
+    "unsupportedTimeUnit": "Unsupported time unit: {unit}",
+    "rsaEcdsaRequiresCryptoKey": "RSA/ECDSA algorithm requires CryptoKey",
+    "unsupportedJWTAlgorithm": "Unsupported JWT algorithm: {algorithm}",
+    "invalidJWTTokenFormat": "Invalid JWT token format",
+    "invalidJWTTokenType": "Invalid JWT token type",
+    "jwtSignatureVerificationFailed": "JWT token signature verification failed",
+    "jwtExpired": "JWT token has expired",
+    "jwtNotYetValid": "JWT token is not yet valid",
+    "passwordHashRequiresExternal": "Password hash algorithm {algorithm} requires an external library. Please use a dedicated password hashing library (e.g. npm:bcrypt or npm:argon2).",
+    "passwordVerifyRequiresExternal": "Password verification requires an external library. Please use a dedicated password hashing library (e.g. npm:bcrypt or npm:argon2)."
+  }
+}
