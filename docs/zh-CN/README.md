@@ -7,11 +7,11 @@
 
 [![JSR](https://jsr.io/badges/@dreamer/crypto)](https://jsr.io/@dreamer/crypto)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](../../LICENSE)
-[![Tests](https://img.shields.io/badge/tests-70%20passed-brightgreen)](./TEST_REPORT.md)
+[![Tests](https://img.shields.io/badge/tests-85%20passed-brightgreen)](./TEST_REPORT.md)
 
-**变更日志**（最新）：[1.0.1] - 2026-02-19 — 新增：国际化（i18n）、语言
-API（`setCryptoLocale`、`detectLocale`）、语言包（zh-CN、en-US）。变更：错误信息改为本地化。完整历史：[English](../en-US/CHANGELOG.md)
-| [中文](./CHANGELOG.md)
+**变更日志**（最新）：[1.0.2] - 2026-02-20 — 新增：浏览器测试套件（14 条，共 85
+条）。变更：客户端入口仅英文错误、无
+i18n。完整历史：[English](../en-US/CHANGELOG.md) | [中文](./CHANGELOG.md)
 
 ---
 
@@ -407,19 +407,21 @@ async function verifyRequest(token: string) {
 
 ## 📊 测试报告
 
-[![Tests](https://img.shields.io/badge/tests-70%20passed-brightgreen)](./TEST_REPORT.md)
+[![Tests](https://img.shields.io/badge/tests-85%20passed-brightgreen)](./TEST_REPORT.md)
 
-| 指标             | 值                  |
-| ---------------- | ------------------- |
-| **总测试数**     | 70                  |
-| **通过**         | 70                  |
-| **失败**         | 0                   |
-| **通过率**       | 100%                |
-| **测试执行时间** | ~5 秒               |
-| **测试环境**     | Deno 2.5+, Bun 1.0+ |
+| 指标             | 值                          |
+| ---------------- | --------------------------- |
+| **总测试数**     | 85                          |
+| **通过**         | 85                          |
+| **失败**         | 0                           |
+| **通过率**       | 100%                        |
+| **测试执行时间** | ~8 秒                       |
+| **测试环境**     | Deno 2.5+、Bun 1.0+；浏览器 |
 
-**测试覆盖**：哈希、哈希验证、随机数生成、AES 密钥、对称加解密、RSA/ECDSA
-密钥对、RSA 加解密、数字签名、JWT 生成/验证/解码、边界情况与安全验证。
+**测试覆盖**：71 条服务端用例（mod.test.ts）与 14 条浏览器客户端用例
+（browser.test.ts）。哈希、哈希验证、随机数生成、AES 密钥、对称加解密、
+RSA/ECDSA 密钥对、RSA 加解密、数字签名、JWT
+生成/验证/解码、边界情况与安全验证；浏览器测试在无头浏览器中覆盖客户端打包。
 
 详细测试报告请查看 [TEST_REPORT.md](./TEST_REPORT.md)
 

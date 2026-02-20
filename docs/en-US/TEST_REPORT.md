@@ -2,35 +2,36 @@
 
 ## Test Overview
 
-| Item                 | Value               |
-| -------------------- | ------------------- |
-| **Library Version**  | 1.0.0-beta.2        |
-| **Test Framework**   | @dreamer/test       |
-| **Test Date**        | 2026-02-06          |
-| **Test Environment** | Deno 2.5+, Bun 1.0+ |
-| **Test File**        | tests/mod.test.ts   |
-| **Total Tests**      | 70                  |
-| **Passed**           | 70                  |
-| **Failed**           | 0                   |
-| **Pass Rate**        | 100%                |
-| **Execution Time**   | ~5s                 |
+| Item                 | Value                                    |
+| -------------------- | ---------------------------------------- |
+| **Library Version**  | 1.0.1                                    |
+| **Test Framework**   | @dreamer/test                            |
+| **Test Date**        | 2026-02-20                               |
+| **Test Environment** | Deno 2.5+, Bun 1.0+; browser (headless)  |
+| **Test Files**       | tests/mod.test.ts, tests/browser.test.ts |
+| **Total Tests**      | 85                                       |
+| **Passed**           | 85                                       |
+| **Failed**           | 0                                        |
+| **Pass Rate**        | 100%                                     |
+| **Execution Time**   | ~8s                                      |
 
 ---
 
 ## Test Results Summary
 
-All 70 tests passed. Coverage includes:
+All 85 tests passed. Coverage includes:
 
-- Hash (SHA1, SHA256, SHA512)
-- Hash verification
-- Random generation (bytes, string, int, UUID)
-- AES key generation and import
-- Symmetric encryption/decryption (AES-GCM, AES-CBC)
-- RSA key pair generation
-- ECDSA key pair generation
-- RSA encryption/decryption
-- Digital signatures (RSA, ECDSA)
-- JWT (sign, verify, decode)
+- **Server / Node (tests/mod.test.ts, 71 tests)**: Hash (SHA1, SHA256, SHA512),
+  hash verification, random generation (bytes, string, int, UUID), AES key
+  generation and import, symmetric encryption/decryption (AES-GCM, AES-CBC),
+  RSA/ECDSA key pair generation, RSA encryption/decryption, digital signatures
+  (RSA, ECDSA), JWT (sign, verify, decode).
+- **Browser client (tests/browser.test.ts, 14 tests)**: Same APIs exercised in a
+  real browser via @dreamer/test browser integration (headless), including hash,
+  verifyHash, generateUUID, AES encrypt/decrypt, JWT sign/verify/decode,
+  generateRandomBytes/String/Int, decodeJWT, hashPassword/verifyPassword (expect
+  external library error), Uint8Array key encrypt/decrypt (importAESKey), RSA
+  encrypt/decrypt roundtrip, RSA sign/verify roundtrip.
 
 ---
 
@@ -193,6 +194,28 @@ All 70 tests passed. Coverage includes:
 
 ---
 
+## Browser Tests (tests/browser.test.ts, 14 tests)
+
+Client-side crypto is tested in a headless browser via @dreamer/test. All 14
+browser tests passed.
+
+| Test Case                                                      | Status  |
+| -------------------------------------------------------------- | ------- |
+| CryptoClient mounted with full client API                      | ✅ Pass |
+| SHA256 hash in browser                                         | ✅ Pass |
+| verifyHash in browser                                          | ✅ Pass |
+| generateUUID in browser                                        | ✅ Pass |
+| AES-256-GCM encrypt/decrypt in browser                         | ✅ Pass |
+| JWT sign/verify in browser                                     | ✅ Pass |
+| generateRandomBytes / generateRandomString / generateRandomInt | ✅ Pass |
+| decodeJWT in browser                                           | ✅ Pass |
+| hashPassword / verifyPassword throw external library error     | ✅ Pass |
+| Uint8Array key AES encrypt/decrypt (importAESKey) in browser   | ✅ Pass |
+| RSA encrypt/decrypt roundtrip in browser                       | ✅ Pass |
+| RSA sign/verify roundtrip in browser                           | ✅ Pass |
+
+---
+
 ## API Coverage
 
 | API                                         | Coverage |
@@ -231,12 +254,14 @@ All 70 tests passed. Coverage includes:
 
 ## Conclusion
 
-All 70 tests pass (100% pass rate). The crypto library covers hash,
-symmetric/asymmetric encryption, digital signatures, JWT, and random generation.
-Security-sensitive edge cases are tested. Suitable for production use.
+All 85 tests pass (100% pass rate). The crypto library is covered by 71
+server-side tests and 14 browser client tests. Coverage includes hash,
+symmetric/asymmetric encryption, digital signatures, JWT, and random generation;
+browser tests confirm client bundle and Web Crypto API behavior in a real
+browser. Security-sensitive edge cases are tested. Suitable for production use.
 
 ---
 
-**Report generated**: 2026-02-06\
-**Environment**: Deno 2.5+, Bun 1.0+\
+**Report generated**: 2026-02-20\
+**Environment**: Deno 2.5+, Bun 1.0+; browser (headless)\
 **Framework**: @dreamer/test

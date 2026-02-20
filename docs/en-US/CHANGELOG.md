@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.0.2] - 2026-02-20
+
+### Added
+
+- **Browser test suite** (`tests/browser.test.ts`): 14 tests run in a headless
+  browser via @dreamer/test, covering the client entry
+  (`jsr:@dreamer/crypto/client`) — hash, verifyHash, generateUUID, AES
+  encrypt/decrypt, JWT sign/verify/decode, generateRandomBytes/String/Int,
+  decodeJWT, importAESKey (Uint8Array key), RSA encrypt/decrypt and sign/verify
+  roundtrips, and hashPassword/verifyPassword error behavior. Total tests: 85
+  (71 server + 14 browser).
+
+### Changed
+
+- **Client entry** (`jsr:@dreamer/crypto/client`): Removed i18n dependency;
+  error messages are English-only for smaller bundle and browser compatibility.
+  Server entry (`jsr:@dreamer/crypto`) still supports i18n.
+
+### Documentation
+
+- Test report (en-US and zh-CN) updated to 85 tests, execution time ~8s, with
+  browser test section. README test badge and summary updated.
+
+---
+
 ## [1.0.1] - 2026-02-19
 
 ### Added

@@ -7,6 +7,30 @@
 
 ---
 
+## [1.0.2] - 2026-02-20
+
+### 新增
+
+- **浏览器测试套件**（`tests/browser.test.ts`）：通过 @dreamer/test
+  在无头浏览器中运行 14 条用例，覆盖客户端入口（`jsr:@dreamer/crypto/client`）的
+  hash、verifyHash、generateUUID、AES 加解密、JWT
+  签发/验证/解码、generateRandomBytes/String/Int、decodeJWT、importAESKey（Uint8Array
+  密钥）、RSA 加解密与签名验证往返，以及 hashPassword/verifyPassword
+  错误行为。总用例数 85（71 服务端 + 14 浏览器）。
+
+### 变更
+
+- **客户端入口**（`jsr:@dreamer/crypto/client`）：移除 i18n
+  依赖，错误信息改为仅英文，以减小打包体积并兼容浏览器。服务端入口（`jsr:@dreamer/crypto`）仍支持
+  i18n。
+
+### 文档
+
+- 中英文测试报告更新为 85 条用例、执行时间约 8s，并增加浏览器测试小节；README
+  测试徽章与摘要已更新。
+
+---
+
 ## [1.0.1] - 2026-02-19
 
 ### 新增

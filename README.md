@@ -7,11 +7,11 @@ English | [中文 (Chinese)](./docs/zh-CN/README.md)
 
 [![JSR](https://jsr.io/badges/@dreamer/crypto)](https://jsr.io/@dreamer/crypto)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](./LICENSE)
-[![Tests](https://img.shields.io/badge/tests-70%20passed-brightgreen)](./docs/en-US/TEST_REPORT.md)
+[![Tests](https://img.shields.io/badge/tests-85%20passed-brightgreen)](./docs/en-US/TEST_REPORT.md)
 
-**Changelog** (latest): [1.0.1] - 2026-02-19 — Added: i18n support, locale API
-(`setCryptoLocale`, `detectLocale`), locale files (zh-CN, en-US). Changed: error
-messages now localized. Full history: [English](./docs/en-US/CHANGELOG.md) |
+**Changelog** (latest): [1.0.2] - 2026-02-20 — Added: browser test suite (14
+tests, 85 total). Changed: client entry English-only errors, no i18n. Full
+history: [English](./docs/en-US/CHANGELOG.md) |
 [中文 (Chinese)](./docs/zh-CN/CHANGELOG.md)
 
 ---
@@ -391,19 +391,21 @@ async function verifyRequest(token: string) {
 
 ## 📊 Test Report
 
-[![Tests](https://img.shields.io/badge/tests-70%20passed-brightgreen)](./docs/en-US/TEST_REPORT.md)
+[![Tests](https://img.shields.io/badge/tests-85%20passed-brightgreen)](./docs/en-US/TEST_REPORT.md)
 
-| Metric             | Value               |
-| ------------------ | ------------------- |
-| **Total**          | 70                  |
-| **Passed**         | 70                  |
-| **Failed**         | 0                   |
-| **Pass Rate**      | 100%                |
-| **Execution Time** | ~5s                 |
-| **Environment**    | Deno 2.5+, Bun 1.0+ |
+| Metric             | Value                        |
+| ------------------ | ---------------------------- |
+| **Total**          | 85                           |
+| **Passed**         | 85                           |
+| **Failed**         | 0                            |
+| **Pass Rate**      | 100%                         |
+| **Execution Time** | ~8s                          |
+| **Environment**    | Deno 2.5+, Bun 1.0+; browser |
 
-**Coverage**: Hash, verify, random, AES keys, symmetric encryption, RSA/ECDSA
-key pairs, RSA encryption, signatures, JWT, edge cases, security validation.
+**Coverage**: 71 server-side tests (mod.test.ts) and 14 browser client tests
+(browser.test.ts). Hash, verify, random, AES keys, symmetric encryption,
+RSA/ECDSA key pairs, RSA encryption, signatures, JWT, edge cases, security
+validation; browser tests cover client bundle in headless browser.
 
 See [TEST_REPORT.md](./docs/en-US/TEST_REPORT.md) for details.
 
